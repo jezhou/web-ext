@@ -298,7 +298,7 @@ describe('util/extension-runners', () => {
       const config = {
         sourceDir: '/path/to/extension/source/',
         artifactsDir: '/path/to/web-ext-artifacts',
-        watchFile: '/path/to/watched/file',
+        watchDir: '/path/to/watched/file',
         onSourceChange: sinon.spy(() => {}),
         ignoreFiles: ['path/to/file', 'path/to/file2'],
         reloadExtension: sinon.spy(() => Promise.resolve()),
@@ -319,7 +319,7 @@ describe('util/extension-runners', () => {
         config.onSourceChange,
         sinon.match({
           sourceDir: config.sourceDir,
-          watchFile: config.watchFile,
+          watchDir: config.watchDir,
           artifactsDir: config.artifactsDir,
           onChange: sinon.match.typeOf('function'),
         })
@@ -389,7 +389,7 @@ describe('util/extension-runners', () => {
       const args = {
         extensionRunner,
         sourceDir: '/path/to/extension/source',
-        watchFile: '/path/to/watched/file',
+        watchDir: '/path/to/watched/file',
         artifactsDir: '/path/to/web-ext-artifacts/',
         ignoreFiles: ['first/file', 'second/file'],
       };
@@ -422,7 +422,7 @@ describe('util/extension-runners', () => {
         createWatcher,
         sinon.match({
           sourceDir: sentArgs.sourceDir,
-          watchFile: sentArgs.watchFile,
+          watchDir: sentArgs.watchDir,
           artifactsDir: sentArgs.artifactsDir,
           ignoreFiles: sentArgs.ignoreFiles,
         })

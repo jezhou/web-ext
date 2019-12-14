@@ -163,14 +163,14 @@ describe('run', () => {
     const {sourceDir, artifactsDir} = cmd.argv;
     const {reloadStrategy} = cmd.options;
 
-    const watchFile = fixturePath('minimal-web-ext', 'manifest.json');
+    const watchDir = fixturePath('minimal-web-ext', 'manifest.json');
 
-    await cmd.run({noReload: false, watchFile });
+    await cmd.run({noReload: false, watchDir });
     assert.equal(reloadStrategy.called, true);
     const args = reloadStrategy.firstCall.args[0];
     assert.equal(args.sourceDir, sourceDir);
     assert.equal(args.artifactsDir, artifactsDir);
-    assert.equal(args.watchFile, watchFile);
+    assert.equal(args.watchDir, watchDir);
   });
 
   it('can disable input in the reload strategy', async () => {

@@ -16,7 +16,7 @@ export type OnChangeFn = () => any;
 
 export type OnSourceChangeParams = {|
   sourceDir: string,
-  watchFile?: string,
+  watchDir?: string,
   artifactsDir: string,
   onChange: OnChangeFn,
   shouldWatchFile: ShouldWatchFn,
@@ -33,7 +33,7 @@ export type OnSourceChangeFn = (params: OnSourceChangeParams) => Watchpack;
 export default function onSourceChange(
   {
     sourceDir,
-    watchFile,
+    watchDir,
     artifactsDir,
     onChange,
     shouldWatchFile,
@@ -49,12 +49,12 @@ export default function onSourceChange(
     proxyFileChanges({artifactsDir, onChange, filePath, shouldWatchFile});
   });
 
-  log.debug(`Watching for file changes in ${watchFile || sourceDir}`);
+  log.debug(`Watching for file changes in ${watchDir || sourceDir}`);
 
   watcher.watch([], [sourceDir], Date.now());
 
-  if (watchFile) {
-    watcher.watch([watchFile], [], Date.now());
+  if (watchDir) {
+    watcher.watch([watchDir], [], Date.now());
   }
 
   // TODO: support interrupting the watcher on Windows.

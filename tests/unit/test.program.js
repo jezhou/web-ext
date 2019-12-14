@@ -473,20 +473,20 @@ describe('program.main', () => {
       });
   });
 
-  it('calls run with a watched file', () => {
-    const watchFile = 'path/to/fake/file.txt';
+  it('calls run with a watched dir', () => {
+    const watchDir = 'path/to/fake/file.txt';
 
     const fakeCommands = fake(commands, {
       run: () => Promise.resolve(),
     });
 
     return execProgram(
-      ['run', '--watch-file', watchFile],
+      ['run', '--watch-dir', watchDir],
       {commands: fakeCommands})
       .then(() => {
         sinon.assert.calledWithMatch(
           fakeCommands.run,
-          {watchFile}
+          {watchDir}
         );
       });
   });

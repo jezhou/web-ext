@@ -495,7 +495,7 @@ Example: $0 --help run.
         demandOption: false,
         type: 'boolean',
       },
-      'watch-file': {
+      'watch-dir': {
         describe: 'Reload the extension only when the contents of this' +
                   'file changes. This is useful if you use a custom' +
                   ' build process for your extension',

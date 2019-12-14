@@ -9,22 +9,22 @@ import {default as onSourceChange, proxyFileChanges} from '../../src/watcher';
 import {withTempDir} from '../../src/util/temp-dir';
 
 type AssertWatchedParams = {
-  watchFile?: string,
+  watchDir?: string,
   touchedFile: string,
 }
 
 describe('watcher', () => {
 
   const watchChange = ({
-    watchFile,
+    watchDir,
     touchedFile,
   }: AssertWatchedParams = {}) => withTempDir(
     (tmpDir) => {
       const artifactsDir = path.join(tmpDir.path(), 'web-ext-artifacts');
       const someFile = path.join(tmpDir.path(), touchedFile);
 
-      if (watchFile) {
-        watchFile = path.join(tmpDir.path(), watchFile);
+      if (watchDir) {
+        watchDir = path.join(tmpDir.path(), watchDir);
       }
 
       var resolveChange;
@@ -39,7 +39,7 @@ describe('watcher', () => {
         .then(() => {
           return onSourceChange({
             sourceDir: tmpDir.path(),
-            watchFile,
+            watchDir,
             artifactsDir,
             onChange,
             shouldWatchFile: () => true,
@@ -76,17 +76,17 @@ describe('watcher', () => {
       .then((onChange) => sinon.assert.calledOnce(onChange));
   });
 
-  describe('--watch-file option is passed in', () => {
-    it('changes if the watched file is the same as the touched file', () => {
+  describe('--watch-dir option is passed in', () => {
+    it('changes if the watched dir is the same as the touched file', () => {
       return watchChange({
-        watchFile: 'foo.txt',
+        watchDir: 'foo.txt',
         touchedFile: 'foo.txt',
       }).then((onChange) => sinon.assert.calledOnce(onChange));
     });
 
-    it('does not change if watched file and touched file are different', () => {
+    it('does not change if watched dir and touched file are different', () => {
       return watchChange({
-        watchFile: 'bar.txt',
+        watchDir: 'bar.txt',
         touchedFile: 'foo.txt',
       }).then((onChange) => sinon.assert.notCalled(onChange));
     });
