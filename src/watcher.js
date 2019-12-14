@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* @flow */
 import Watchpack from 'watchpack';
 import debounce from 'debounce';
@@ -54,7 +55,8 @@ export default function onSourceChange(
   watcher.watch([], [sourceDir], Date.now());
 
   if (watchDir) {
-    watcher.watch([watchDir], [], Date.now());
+    console.log(`watchDir in file is ${watchDir}`);
+    watcher.watch([], [watchDir], Date.now());
   }
 
   // TODO: support interrupting the watcher on Windows.
